@@ -1,0 +1,21 @@
+Package: tidygenomics
+Type: Package
+Title: Tidy Verbs for dealing with Genomic DataFrames
+Version: 0.1.0
+Authors@R: person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", role = c("aut", "cre"))
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr,
+    fuzzyjoin,
+    IRanges,
+    Rcpp
+Suggests: testthat
+RoxygenNote: 6.0.1
+LinkingTo: 
+    Rcpp,
+    BH,
+    dplyr
