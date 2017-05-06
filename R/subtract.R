@@ -9,18 +9,24 @@
 #'   For example: \code{by=c("Chromosome"="chr", "Start"="start", "End"="end")}
 #' @return The subtracted dataframe of \code{x} and \code{y} with the new boundaries.
 #' @examples
-#' x1 <- data_frame(id = 1:4, bla=letters[1:4],
+#'
+#' library(dplyr)
+#'
+#' x1 <- data.frame(id = 1:4, bla=letters[1:4],
 #'                  chromosome = c("chr1", "chr1", "chr2", "chr1"),
 #'                  start = c(100, 200, 300, 400),
 #'                  end = c(150, 250, 350, 450))
 #'
-#' x2 <- data_frame(id = 1:4, BLA=LETTERS[1:4],
+#' x2 <- data.frame(id = 1:4, BLA=LETTERS[1:4],
 #'                  chromosome = c("chr1", "chr2", "chr1", "chr1"),
 #'                  start = c(120, 210, 300, 400),
 #'                  end = c(125, 240, 320, 415))
 #'
 #' j <- genome_subtract(x1, x2, by=c("chromosome", "start", "end"))
 #' print(j)
+#'
+#' @importFrom dplyr n
+#'
 #' @export
 genome_subtract <- function(x, y, by=NULL){
 
@@ -79,10 +85,10 @@ genome_subtract <- function(x, y, by=NULL){
   matches <- f(d1, d2)
 
   ret <- x %>%
-    dplyr::select(- one_of(by$x[-1])) %>%
+    dplyr::select(- dplyr::one_of(by$x[-1])) %>%
     dplyr::mutate(..id=seq_len(n())) %>%
     dplyr::inner_join(matches[, c("x", "..start", "..end")], by=c("..id"="x")) %>%
-    dplyr::rename_(.dots=setNames(c("..start", "..end"), by$x[-1])) %>%
+    dplyr::rename_(.dots=stats::setNames(c("..start", "..end"), by$x[-1])) %>%
     dplyr::select_(quote(- `..id`)) %>%
     regroup()
   return(ret)

@@ -4,6 +4,8 @@
 #' Cluster ranges which are implemented as 2 equal-length numeric vectors.
 #' @param starts A numeric vector that defines the starts of each interval
 #' @param ends A numeric vector that defines the ends of each interval
+#' @param max_distance The maximum distance up to which intervals are still considered to be
+#'  the same cluster. Default: 0.
 #' @examples
 #' starts <- c(50, 100, 120)
 #' ends <- c(75, 130, 150)

@@ -13,14 +13,18 @@
 #' @param select A string that is passed on to \code{IRanges::distanceToNearest}, can either be
 #'  all which means that in case that multiple intervals have the same distance all are reported, or
 #'  arbitrary which means in that case one would be chosen at random.
+#' @param ... Additional arguments parsed on to genome_join_closest.
 #' @return The joined dataframe of \code{x} and \code{y}.
 #' @examples
-#' x1 <- data_frame(id = 1:4, bla=letters[1:4],
+#'
+#' library(dplyr)
+#'
+#' x1 <- data.frame(id = 1:4, bla=letters[1:4],
 #'                  chromosome = c("chr1", "chr1", "chr2", "chr2"),
 #'                  start = c(100, 200, 300, 400),
 #'                  end = c(150, 250, 350, 450))
 #'
-#' x2 <- data_frame(id = 1:4, BLA=LETTERS[1:4],
+#' x2 <- data.frame(id = 1:4, BLA=LETTERS[1:4],
 #'                  chromosome = c("chr1", "chr2", "chr2", "chr1"),
 #'                  start = c(140, 210, 400, 300),
 #'                  end = c(160, 240, 415, 320))
@@ -28,7 +32,7 @@
 #' print(j)
 #' @export
 genome_join_closest <- function(x, y, by=NULL,  mode = "inner",
-                           distance_column_name=NULL, max_distance=Inf, select="all"){
+                                distance_column_name=NULL, max_distance=Inf, select="all"){
 
   # Nearly all of this code is copied from https://github.com/dgrtwo/fuzzyjoin
 
@@ -39,7 +43,7 @@ genome_join_closest <- function(x, y, by=NULL,  mode = "inner",
 
   select <- match.arg(select, c("all", "arbitrary"))
 
-  by <- common_by(by, x, y)
+  by <- dplyr::common_by(by, x, y)
   if (length(by$x) != 3) {
     stop("genome_join_closest must join on exactly three columns")
   }
@@ -62,7 +66,7 @@ genome_join_closest <- function(x, y, by=NULL,  mode = "inner",
       o <- as.data.frame(IRanges::distanceToNearest(r1, r2, select=select))
 
       data.frame(x = xd$..index[o$queryHits], y = yd$..index[o$subjectHits], ..distance=o$distance) %>%
-        filter(..distance < max_distance)
+        dplyr::filter_(paste0("..distance < ", max_distance))
     }
 
     ret <- purrr::map2_df(joined$x_data, joined$y_data, find_closest)

@@ -10,6 +10,9 @@ cluster_interval(starts, ends, max_distance = 0L)
 \item{starts}{A numeric vector that defines the starts of each interval}
 
 \item{ends}{A numeric vector that defines the ends of each interval}
+
+\item{max_distance}{The maximum distance up to which intervals are still considered to be
+the same cluster. Default: 0.}
 }
 \description{
 Cluster ranges which are implemented as 2 equal-length numeric vectors.

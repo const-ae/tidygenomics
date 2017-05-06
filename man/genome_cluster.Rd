@@ -12,6 +12,11 @@ genome_cluster(x, by = NULL, max_distance = 0,
 
 \item{by}{A character vector with 3 entries which are the chromosome, start and end column.
 For example: \code{by=c("chr", "start", "end")}}
+
+\item{max_distance}{The maximum distance up to which intervals are still considered to be
+the same cluster. Default: 0.}
+
+\item{cluster_column_name}{A string that is used as the new column name}
 }
 \value{
 The dataframe with the additional column of the cluster
@@ -20,7 +25,10 @@ The dataframe with the additional column of the cluster
 Intersect data frames based on chromosome, start and end.
 }
 \examples{
-x1 <- data_frame(id = 1:4, bla=letters[1:4],
+
+library(dplyr)
+
+x1 <- data.frame(id = 1:4, bla=letters[1:4],
                  chromosome = c("chr1", "chr1", "chr2", "chr1"),
                  start = c(100, 120, 300, 260),
                  end = c(150, 250, 350, 450))

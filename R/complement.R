@@ -14,7 +14,10 @@
 #' @param by A character vector with 3 entries which are the chromosome, start and end column.
 #'   For example: \code{by=c("chr", "start", "end")}
 #' @examples
-#' x1 <- data_frame(id = 1:4, bla=letters[1:4],
+#'
+#' library(dplyr)
+#'
+#' x1 <- data.frame(id = 1:4, bla=letters[1:4],
 #'                  chromosome = c("chr1", "chr1", "chr2", "chr1"),
 #'                  start = c(100, 200, 300, 400),
 #'                  end = c(150, 250, 350, 450))
@@ -30,8 +33,8 @@ genome_complement <- function(x, chromosome_size=NULL, by=NULL){
 
   if(is.null(chromosome_size)){
     chromosome_size <- x %>%
-      group_by_(by[1]) %>%
-      summarize_(.dots=list(
+      dplyr::group_by_(by[1]) %>%
+      dplyr::summarize_(.dots=list(
         start=1,
         end=paste0("max(", by[3], ")")
       ))

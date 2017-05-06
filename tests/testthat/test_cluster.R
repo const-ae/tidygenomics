@@ -14,7 +14,7 @@ test_that("genome_clustering assings that correct clusters", {
 
   print(j)
 
-  expect_equal(j$cluster, c(1,1,3,2)-1)
+  expect_equal(j$cluster_id, c(0,0,2,1))
 })
 
 

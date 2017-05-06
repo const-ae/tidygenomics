@@ -8,17 +8,24 @@
 #' @param mode One of "both", "left", "right" or "anti".
 #' @return The intersected dataframe of \code{x} and \code{y} with the new boundaries.
 #' @examples
-#' x1 <- data_frame(id = 1:4, bla=letters[1:4],
+#'
+#' library(dplyr)
+#'
+#' x1 <- data.frame(id = 1:4, bla=letters[1:4],
 #'                  chromosome = c("chr1", "chr1", "chr2", "chr2"),
 #'                  start = c(100, 200, 300, 400),
 #'                  end = c(150, 250, 350, 450))
 #'
-#' x2 <- data_frame(id = 1:4, BLA=LETTERS[1:4],
+#' x2 <- data.frame(id = 1:4, BLA=LETTERS[1:4],
 #'                  chromosome = c("chr1", "chr2", "chr2", "chr1"),
 #'                  start = c(140, 210, 400, 300),
 #'                  end = c(160, 240, 415, 320))
 #' j <- genome_intersect(x1, x2, by=c("chromosome", "start", "end"), mode="both")
 #' print(j)
+#'
+#'
+#' @importFrom dplyr "%>%"
+#'
 #' @export
 genome_intersect <- function(x, y, by=NULL, mode= "both"){
 
@@ -83,20 +90,20 @@ genome_intersect <- function(x, y, by=NULL, mode= "both"){
   }
   if (mode == "left") {
     ret <- x %>%
-      dplyr::select(- one_of(by$x[-1])) %>%
+      dplyr::select(- dplyr::one_of(by$x[-1])) %>%
       dplyr::mutate(..id=seq_len(n())) %>%
       dplyr::inner_join(matches[, c("x", "..start", "..end")], by=c("..id"="x")) %>%
-      dplyr::rename_(.dots=setNames(c("..start", "..end"), by$x[-1])) %>%
+      dplyr::rename_(.dots=stats::setNames(c("..start", "..end"), by$x[-1])) %>%
       dplyr::select_(quote(- `..id`)) %>%
       regroup()
     return(ret)
   }
   else if (mode == "right") {
     ret <- y %>%
-      dplyr::select(- one_of(by$y[-1])) %>%
+      dplyr::select(- dplyr::one_of(by$y[-1])) %>%
       dplyr::mutate(..id=seq_len(n())) %>%
       dplyr::inner_join(matches[,c("y", "..start", "..end")], by=c("..id"="y")) %>%
-      dplyr::rename_(.dots=setNames(c("..start", "..end"), by$y[-1])) %>%
+      dplyr::rename_(.dots=stats::setNames(c("..start", "..end"), by$y[-1])) %>%
       dplyr::select_(quote(- `..id`)) %>%
       regroup()
     return(ret)
@@ -112,12 +119,12 @@ genome_intersect <- function(x, y, by=NULL, mode= "both"){
     }
   }
 
-  ret <- dplyr::bind_cols(x[matches$x, , drop = FALSE] %>% dplyr::select(- one_of(by$x[-1])),
-                          y[matches$y, , drop = FALSE] %>% dplyr::select(- one_of(by$y)))
+  ret <- dplyr::bind_cols(x[matches$x, , drop = FALSE] %>% dplyr::select(- dplyr::one_of(by$x[-1])),
+                          y[matches$y, , drop = FALSE] %>% dplyr::select(- dplyr::one_of(by$y)))
   if (ncol(matches) > 2) {
     extra_cols <- matches[, -(1:2), drop = FALSE]
     ret <- dplyr::bind_cols(ret, extra_cols) %>%
-      dplyr::rename_(.dots=setNames(c("..start", "..end"), by$x[-1]))
+      dplyr::rename_(.dots=stats::setNames(c("..start", "..end"), by$x[-1]))
   }
   regroup(ret)
 

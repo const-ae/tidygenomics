@@ -27,6 +27,8 @@ vector<size_t> sort_indexes(const Vector<RTYPE>& v) {
 //' Cluster ranges which are implemented as 2 equal-length numeric vectors.
 //' @param starts A numeric vector that defines the starts of each interval
 //' @param ends A numeric vector that defines the ends of each interval
+//' @param max_distance The maximum distance up to which intervals are still considered to be
+//'  the same cluster. Default: 0.
 //' @examples
 //' starts <- c(50, 100, 120)
 //' ends <- c(75, 130, 150)
@@ -44,6 +46,7 @@ IntegerVector cluster_interval(NumericVector starts, NumericVector ends, int max
   int cluster_id = 0;
   int prev_end = starts[0];
   for (auto i: sort_indexes(clone(starts))) {
+    Rcpp::checkUserInterrupt();
     if(starts[i] - prev_end > max_distance){
       cluster_id++;
       prev_end = ends[i];

@@ -43,6 +43,8 @@ If \code{NULL} no new column is added.}
 \item{select}{A string that is passed on to \code{IRanges::distanceToNearest}, can either be
 all which means that in case that multiple intervals have the same distance all are reported, or
 arbitrary which means in that case one would be chosen at random.}
+
+\item{...}{Additional arguments parsed on to genome_join_closest.}
 }
 \value{
 The joined dataframe of \code{x} and \code{y}.
@@ -51,12 +53,15 @@ The joined dataframe of \code{x} and \code{y}.
 Join intervals on chromosomes in data frames, to the closest partner
 }
 \examples{
-x1 <- data_frame(id = 1:4, bla=letters[1:4],
+
+library(dplyr)
+
+x1 <- data.frame(id = 1:4, bla=letters[1:4],
                  chromosome = c("chr1", "chr1", "chr2", "chr2"),
                  start = c(100, 200, 300, 400),
                  end = c(150, 250, 350, 450))
 
-x2 <- data_frame(id = 1:4, BLA=LETTERS[1:4],
+x2 <- data.frame(id = 1:4, BLA=LETTERS[1:4],
                  chromosome = c("chr1", "chr2", "chr2", "chr1"),
                  start = c(140, 210, 400, 300),
                  end = c(160, 240, 415, 320))
