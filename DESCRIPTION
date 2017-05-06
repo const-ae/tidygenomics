@@ -15,9 +15,12 @@ Imports:
     fuzzyjoin,
     IRanges,
     Rcpp
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.0.1
-LinkingTo: 
+LinkingTo:
     Rcpp,
     BH,
     dplyr
+VignetteBuilder: knitr

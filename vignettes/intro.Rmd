@@ -1,0 +1,169 @@
+---
+title: "Tidy Genomics"
+author: "Constantin Ahlmann-Eltze"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+        fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The most dramatic impact on programming in R lately was the developement of the [tidyverse](http://tidyverse.org/) by Hadley Wickham et al.
+which, combined with the ingenious `%>%` from magrittr, provides a uniform philsophie for handling data.
+
+The genomics community has an alternative set of approaches, for which [bioconductor](http://bioconductor.org/) and the 
+[GenomicRanges](http://bioconductor.org/packages/release/bioc/html/GenomicRanges.html) package provide the basis. The `GenomicRanges` and
+the underlying `IRanges` package provide a great set of methods for dealing with intervals as they typically encountered in genomics.
+
+Unfortunately it is not always easy to combine those two worlds, many common operations in `GenomicRanges` focus solely on the
+ranges and loose the additional metadata columns. On the other hand the `tidyverse` does not provide a unified set of methods
+to do common set operations with intervals.
+
+At least until recently, when the [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) package was extented with the `genome_join`
+method for combining genomic data stored in a `data.frame`. It demonstrated that genomic data could appropriately be handled
+with the _tidy_-philosophie.
+
+The `tidygenomics` package extends the limited set of methods provided by the `fuzzyjoin` package for dealing with genomic
+data. Its API is inspired by the very popular [bedtools](http://bedtools.readthedocs.io/en/latest/index.html):
+
+
+- `genome_intersect`
+- `genome_subtract`
+- `genome_join_closest`
+- `genome_cluster`
+- `genome_complement`
+- `genome_join` _Implemented by the fuzzyjoin package_
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(dplyr)
+library(tidygenomics)
+```
+
+
+## genome_intersect
+
+Joins 2 data frames based on their genomic overlap. Unlike the `genome_join` function it updates the boundaries to reflect
+the overlap of the regions.
+
+<img src="resources/genome_intersect_docu.png" alt="genome_intersect" style="width: 100%;"/>
+
+
+```{r}
+x1 <- data.frame(id = 1:4, 
+                chromosome = c("chr1", "chr1", "chr2", "chr2"),
+                start = c(100, 200, 300, 400),
+                end = c(150, 250, 350, 450))
+
+x2 <- data.frame(id = 1:4,
+                 chromosome = c("chr1", "chr2", "chr2", "chr1"),
+                 start = c(140, 210, 400, 300),
+                 end = c(160, 240, 415, 320))
+
+genome_intersect(x1, x2, by=c("chromosome", "start", "end"), mode="both")
+```
+
+
+## genome_subtract
+
+Subtract one data frame from the other. This can be used to split the x data frame into smaller areas.
+
+<img src="resources/genome_subtract_docu.png" alt="genome_subtract" style="width: 100%;"/>
+
+```{r}
+x1 <- data.frame(id = 1:4,
+                chromosome = c("chr1", "chr1", "chr2", "chr1"),
+                start = c(100, 200, 300, 400),
+                end = c(150, 250, 350, 450))
+
+x2 <- data.frame(id = 1:4,
+                chromosome = c("chr1", "chr2", "chr1", "chr1"),
+                start = c(120, 210, 300, 400),
+                end = c(125, 240, 320, 415))
+
+genome_subtract(x1, x2, by=c("chromosome", "start", "end"))
+```
+
+
+
+
+## genome_join_closest
+
+Joins 2 data frames based on their genomic location. If no exact overlap is found the closest element is used.
+
+<img src="resources/genome_join_closest_docu.png" alt="genome_join_closest" style="width: 100%;"/>
+
+```{r}
+x1 <- data_frame(id = 1:4, 
+                 chr = c("chr1", "chr1", "chr2", "chr3"),
+                 start = c(100, 200, 300, 400),
+                 end = c(150, 250, 350, 450))
+
+x2 <- data_frame(id = 1:4,
+                 chr = c("chr1", "chr1", "chr1", "chr2"),
+                 start = c(220, 210, 300, 400),
+                 end = c(225, 240, 320, 415))
+genome_join_closest(x1, x2, by=c("chr", "start", "end"), distance_column_name="distance", mode="left")
+```
+
+
+## genome_cluster
+
+Add a new column with the cluster id, if 2 intervals are overlapping or within `max_distance`.
+
+<img src="resources/genome_cluster_docu.png" alt="genome_cluster" style="width: 100%;"/>
+
+```{r}
+x1 <- data.frame(id = 1:4, bla=letters[1:4],
+                chromosome = c("chr1", "chr1", "chr2", "chr1"),
+                start = c(100, 120, 300, 260),
+                end = c(150, 250, 350, 450))
+genome_cluster(x1, by=c("chromosome", "start", "end"))
+genome_cluster(x1, by=c("chromosome", "start", "end"), max_distance=10)
+```
+
+## genome_complement
+
+Calculates the complement of a genomic region.
+
+<img src="resources/genome_complement_docu.png" alt="genome_complement" style="width: 100%;"/>
+
+```{r}
+x1 <- data.frame(id = 1:4,
+                 chromosome = c("chr1", "chr1", "chr2", "chr1"),
+                 start = c(100, 200, 300, 400),
+                 end = c(150, 250, 350, 450))
+
+genome_complement(x1, by=c("chromosome", "start", "end"))
+```
+
+
+
+## genome_join
+
+Classical join function based on the overlap of the interval. Implemented and mainted in the
+[fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) package and documented here only for completeness.
+
+<img src="resources/genome_join_docu.png" alt="genome_join" style="width: 100%;"/>
+
+```{r}
+x1 <- data_frame(id = 1:4, 
+                 chr = c("chr1", "chr1", "chr2", "chr3"),
+                 start = c(100, 200, 300, 400),
+                 end = c(150, 250, 350, 450))
+
+x2 <- data_frame(id = 1:4,
+                 chr = c("chr1", "chr1", "chr1", "chr2"),
+                 start = c(220, 210, 300, 400),
+                 end = c(225, 240, 320, 415))
+fuzzyjoin::genome_join(x1, x2, by=c("chr", "start", "end"), mode="inner")
+
+fuzzyjoin::genome_join(x1, x2, by=c("chr", "start", "end"), mode="left")
+
+fuzzyjoin::genome_join(x1, x2, by=c("chr", "start", "end"), mode="anti")
+```
+
+
+
