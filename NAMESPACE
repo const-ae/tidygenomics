@@ -3,6 +3,7 @@
 export(cluster_interval)
 export(genome_anti_join_closest)
 export(genome_cluster)
+export(genome_complement)
 export(genome_full_join_closest)
 export(genome_inner_join_closest)
 export(genome_intersect)
