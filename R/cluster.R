@@ -46,11 +46,11 @@ genome_cluster <- function(x, by=NULL, max_distance=0, cluster_column_name="clus
   }
 
 
-  cluster_counter <- 0
   ret <- x %>%
     dplyr::group_by_(by[1]) %>%
-    # mutate(cluster_column_name=cluster_interval(start, end))
-    dplyr::mutate_(.dots=stats::setNames(list(paste0("tidygenomics::cluster_interval(", by[2], ",", by[3], ")")), cluster_column_name)) %>%
+    # mutate(cluster_column_name=cluster_interval(start, end, max_distance))
+    dplyr::mutate_(.dots=stats::setNames(list(paste0("tidygenomics::cluster_interval(", by[2], ",", by[3], ", ", max_distance, ")")),
+                                         cluster_column_name)) %>%
     dplyr::ungroup() %>%
     # dplyr::mutate(cluster=(paste0(chromosome,"-", cluster) %>% as.factor %>% as.numeric())-1)
     dplyr::mutate_(.dots=stats::setNames(list(paste0("as.numeric(as.factor(paste0(", by[1],",\"-\",", cluster_column_name, ")))-1")),
