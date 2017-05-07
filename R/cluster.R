@@ -1,5 +1,5 @@
 
-#' @useDynLib tidygenomics
+#' @useDynLib tidygenomics, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 
