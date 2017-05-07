@@ -1,11 +1,13 @@
 Package: tidygenomics
 Type: Package
-Title: Tidy Verbs for dealing with Genomic DataFrames
+Title: Tidy Verbs for Dealing with Genomic Data Frames
 Version: 0.1.0
 Authors@R: person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", role = c("aut", "cre"))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: Handle genomic data within data frames just as you would with `GRanges`.
+    This packages provides method to deal with genomics intervals the "tidy-way" which makes
+    it simpler to integrate in the the general data munging process. The API is inspired by the
+    popular bedtools and the genome_join() method from the fuzzyjoin package.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
@@ -20,7 +22,5 @@ Suggests: testthat,
     rmarkdown
 RoxygenNote: 6.0.1
 LinkingTo:
-    Rcpp,
-    BH,
-    dplyr
+    Rcpp
 VignetteBuilder: knitr
