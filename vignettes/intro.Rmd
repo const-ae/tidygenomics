@@ -11,8 +11,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The most dramatic impact on programming in R lately was the developement of the [tidyverse](http://tidyverse.org/) by Hadley Wickham et al.
-which, combined with the ingenious `%>%` from magrittr, provides a uniform philsophie for handling data.
+The most dramatic impact on programming in R the last years was the developement of the [tidyverse](http://tidyverse.org/) by Hadley Wickham et al.
+which, combined with the ingenious `%>%` from magrittr, provides a uniform philsophy for handling data.
 
 The genomics community has an alternative set of approaches, for which [bioconductor](http://bioconductor.org/) and the 
 [GenomicRanges](http://bioconductor.org/packages/release/bioc/html/GenomicRanges.html) package provide the basis. The `GenomicRanges` and
@@ -24,7 +24,7 @@ to do common set operations with intervals.
 
 At least until recently, when the [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) package was extented with the `genome_join`
 method for combining genomic data stored in a `data.frame`. It demonstrated that genomic data could appropriately be handled
-with the _tidy_-philosophie.
+with the _tidy_-philosophy.
 
 The `tidygenomics` package extends the limited set of methods provided by the `fuzzyjoin` package for dealing with genomic
 data. Its API is inspired by the very popular [bedtools](http://bedtools.readthedocs.io/en/latest/index.html):
@@ -35,7 +35,7 @@ data. Its API is inspired by the very popular [bedtools](http://bedtools.readthe
 - `genome_join_closest`
 - `genome_cluster`
 - `genome_complement`
-- `genome_join` _Implemented by the fuzzyjoin package_
+- `genome_join` _Provided by the fuzzyjoin package_
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 library(dplyr)
@@ -68,7 +68,7 @@ genome_intersect(x1, x2, by=c("chromosome", "start", "end"), mode="both")
 
 ## genome_subtract
 
-Subtract one data frame from the other. This can be used to split the x data frame into smaller areas.
+Subtracts one data frame from the other. This can be used to split the x data frame into smaller areas.
 
 <img src="resources/genome_subtract_docu.png" alt="genome_subtract" style="width: 100%;"/>
 
@@ -91,7 +91,7 @@ genome_subtract(x1, x2, by=c("chromosome", "start", "end"))
 
 ## genome_join_closest
 
-Joins 2 data frames based on their genomic location. If no exact overlap is found the closest element is used.
+Joins 2 data frames based on their genomic location. If no exact overlap is found the next closest interval is used.
 
 <img src="resources/genome_join_closest_docu.png" alt="genome_join_closest" style="width: 100%;"/>
 
@@ -111,7 +111,7 @@ genome_join_closest(x1, x2, by=c("chr", "start", "end"), distance_column_name="d
 
 ## genome_cluster
 
-Add a new column with the cluster id, if 2 intervals are overlapping or within `max_distance`.
+Add a new column with the cluster if 2 intervals are overlapping or are within the `max_distance`.
 
 <img src="resources/genome_cluster_docu.png" alt="genome_cluster" style="width: 100%;"/>
 
