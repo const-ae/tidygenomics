@@ -67,8 +67,8 @@ genome_intersect <- function(x, y, by=NULL, mode= "both"){
     find_overlaps <- function(xd, yd) {
       r1 <- IRanges::IRanges(xd[[1]], xd[[2]])
       r2 <- IRanges::IRanges(yd[[1]], yd[[2]])
-      intersection <- IRanges::intersect(r1, r2)
       o <- as.data.frame(IRanges::findOverlaps(r1, r2))
+      intersection <- IRanges::pintersect(r1[o$queryHits], r2[o$subjectHits])
       data.frame(x = xd$..index[o$queryHits], y = yd$..index[o$subjectHits],
                  ..start=IRanges::start(intersection), ..end=IRanges::end(intersection))
     }

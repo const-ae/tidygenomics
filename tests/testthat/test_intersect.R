@@ -54,6 +54,13 @@ test_that("Intersection of 2 data frames works for multi-overlap ranges the othe
 })
 
 
-
+test_that("Intersect and findOverlap always match", {
+  r1 <- IRanges::IRanges(start=c(1,3,24), end=c(1,130,24))
+  r2 <- IRanges::IRanges(start=c(1,20,100), end=c(10,30,110))
+  o <- as.data.frame(IRanges::findOverlaps(r1, r2))
+  intersection <- IRanges::pintersect(r1[o$queryHits], r2[o$subjectHits])
+  expect_equal(length(o$queryHits), length(intersection))
+  expect_true(all(IRanges::poverlaps(intersection, r1[o$queryHits])))
+})
 
 
