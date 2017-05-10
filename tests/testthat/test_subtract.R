@@ -41,3 +41,22 @@ test_that("Edge cases of subtraction of 2 data frames works as expected", {
   expect_equal(j$start, c(100, 126))
   expect_equal(j$end,   c(109, 150))
 })
+
+
+test_that("during subtraction the intervals are not unified", {
+  x1 <- data_frame(id = 1:3, bla=letters[1:3],
+                   chromosome = c("chr1", "chr1", "chr1"),
+                   start = c(100, 115, 200),
+                   end = c(150, 160, 250))
+
+  x2 <- data_frame(id = 1, BLA=LETTERS[1],
+                   chromosome = c("chr1"),
+                   start = c(110),
+                   end = c(130))
+
+  j <- genome_subtract(x1, x2, by=c("chromosome", "start", "end"))
+  print(j)
+  expect_equal(colnames(j), c("id", "bla", "chromosome", "start", "end"))
+  expect_equal(j$start, c(100, 131, 131, 200))
+  expect_equal(j$end,   c(109, 150, 160, 250))
+})

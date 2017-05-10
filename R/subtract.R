@@ -71,8 +71,8 @@ genome_subtract <- function(x, y, by=NULL){
 
       o <- as.data.frame(IRanges::findOverlaps(subtraction, r1))
       data.frame(x = xd$..index[o$subjectHits],
-                 ..start=IRanges::start(subtraction)[o$queryHits],
-                 ..end=IRanges::end(subtraction)[o$queryHits])
+                 ..start=pmax(IRanges::start(subtraction)[o$queryHits], IRanges::start(r1)[o$subjectHits]),
+                 ..end=pmin(IRanges::end(subtraction)[o$queryHits], IRanges::end(r1)[o$subjectHits]))
     }
 
     ret <- purrr::map2_df(joined$x_data, joined$y_data, find_subtractions)
