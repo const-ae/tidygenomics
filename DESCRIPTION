@@ -2,7 +2,11 @@ Package: tidygenomics
 Type: Package
 Title: Tidy Verbs for Dealing with Genomic Data Frames
 Version: 0.1.0
-Authors@R: person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", role = c("aut", "cre"))
+Authors@R:c(person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", role = c("aut", "cre")),
+    person("Stan Developers", role="cph", 
+           comment="Code from the Stan Math library is reused in 'cluster_interval.cpp'"),
+    person("David", "Robinson", role="cph", 
+           comment="Code from the fuzzyjoin package is reused"))
 Description: Handle genomic data within data frames just as you would with 'GRanges'.
     This packages provides method to deal with genomic intervals the "tidy-way" which makes
     it simpler to integrate in the the general data munging process. The API is inspired by the
