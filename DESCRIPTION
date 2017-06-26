@@ -1,7 +1,7 @@
 Package: tidygenomics
 Type: Package
 Title: Tidy Verbs for Dealing with Genomic Data Frames
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R:c(person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", role = c("aut", "cre")),
     person("Stan Developers", role="cph", 
            comment="Code from the Stan Math library is reused in 'cluster_interval.cpp'"),
