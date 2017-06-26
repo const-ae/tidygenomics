@@ -1,5 +1,7 @@
 # tidygenomics
 
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/tidygenomics)](https://cran.r-project.org/package=tidygenomics)
+
 Tidy Verbs for Dealing with Genomic Data Frames
 
 ## Description
@@ -12,7 +14,10 @@ popular bedtools and the genome_join() method from the fuzzyjoin package.
 ## Installation
 
 ```
-devtools::install_github("Artjom-Metro/tidygenomics")
+install.packages("tidygenomics")
+
+# Or to get the latest development version
+devtools::install_github("const-ae/tidygenomics")
 ```
 
 ## Documentation
