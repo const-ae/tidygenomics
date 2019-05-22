@@ -32,7 +32,7 @@ test_that("cluster_interval works", {
 
   starts <- c(500, 300, 150)
   ends <- c(510, 310, 160)
-  expect_equal(cluster_interval(start, end), c(2,1,0))
+  expect_equal(cluster_interval(starts, ends), c(2,1,0))
 
   expect_equal(cluster_interval(numeric(0), numeric(0)), numeric(0))
 })
