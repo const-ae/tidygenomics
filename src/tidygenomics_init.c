@@ -8,12 +8,12 @@
 */
 
 /* .Call calls */
-extern SEXP tidygenomics_cluster_interval(SEXP, SEXP, SEXP);
-extern SEXP tidygenomics_sort_indices(SEXP);
+extern SEXP _tidygenomics_cluster_interval(SEXP, SEXP, SEXP);
+extern SEXP _tidygenomics_sort_indices(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
-    {"tidygenomics_cluster_interval", (DL_FUNC) &tidygenomics_cluster_interval, 3},
-    {"tidygenomics_sort_indices",     (DL_FUNC) &tidygenomics_sort_indices,     1},
+    {"_tidygenomics_cluster_interval", (DL_FUNC) &_tidygenomics_cluster_interval, 3},
+    {"_tidygenomics_sort_indices",     (DL_FUNC) &_tidygenomics_sort_indices,     1},
     {NULL, NULL, 0}
 };
 

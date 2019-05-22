@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // sort_indices
 IntegerVector sort_indices(NumericVector x);
-RcppExport SEXP tidygenomics_sort_indices(SEXP xSEXP) {
+RcppExport SEXP _tidygenomics_sort_indices(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,7 +18,7 @@ END_RCPP
 }
 // cluster_interval
 IntegerVector cluster_interval(NumericVector starts, NumericVector ends, int max_distance);
-RcppExport SEXP tidygenomics_cluster_interval(SEXP startsSEXP, SEXP endsSEXP, SEXP max_distanceSEXP) {
+RcppExport SEXP _tidygenomics_cluster_interval(SEXP startsSEXP, SEXP endsSEXP, SEXP max_distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;

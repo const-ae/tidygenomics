@@ -2,7 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 sort_indices <- function(x) {
-    .Call(tidygenomics_sort_indices, x)
+    .Call(`_tidygenomics_sort_indices`, x)
 }
 
 #' Cluster ranges which are implemented as 2 equal-length numeric vectors.
@@ -17,6 +17,6 @@ sort_indices <- function(x) {
 #' j == c(0,1,1)
 #' @export
 cluster_interval <- function(starts, ends, max_distance = 0L) {
-    .Call(tidygenomics_cluster_interval, starts, ends, max_distance)
+    .Call(`_tidygenomics_cluster_interval`, starts, ends, max_distance)
 }
 
