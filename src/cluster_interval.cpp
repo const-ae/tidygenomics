@@ -98,8 +98,8 @@ IntegerVector cluster_interval(NumericVector starts, NumericVector ends, int max
   // The implementation is inspired by the bedtools implementation:
   // https://github.com/arq5x/bedtools2/blob/14fbbb8aed5c6a04685da2cee3f11b98d70304a7/src/clusterBed/clusterBed.cpp
   IntegerVector result(starts.size());
-  int cluster_id = 0;
-  int prev_end = starts[0];
+  int cluster_id = -1;
+  int prev_end = std::numeric_limits<int>::min();
   vector<int> indices = sort_indices<true>(as<std::vector<double> >(starts));
   for (int j = 0; j < indices.size(); j++) {
     int i = indices[j];

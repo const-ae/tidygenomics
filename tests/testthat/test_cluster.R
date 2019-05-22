@@ -29,4 +29,10 @@ test_that("cluster_interval works", {
   starts <- c(50, 100, 120, 180, 350)
   ends <- c(75, 200, 150, 210, 400)
   expect_equal(cluster_interval(starts, ends), c(0,1,1,1,2))
+
+  starts <- c(500, 300, 150)
+  ends <- c(510, 310, 160)
+  expect_equal(cluster_interval(start, end), c(2,1,0))
+
+  expect_equal(cluster_interval(numeric(0), numeric(0)), numeric(0))
 })
