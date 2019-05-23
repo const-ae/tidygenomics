@@ -89,10 +89,10 @@
 
     
     
-<p>The most dramatic impact on programming in R the last years was the developement of the <a href="http://tidyverse.org/">tidyverse</a> by Hadley Wickham et al. which, combined with the ingenious <code>%&gt;%</code> from magrittr, provides a uniform philsophy for handling data.</p>
+<p>The most dramatic impact on programming in R the last years was the development of the <a href="http://tidyverse.org/">tidyverse</a> by Hadley Wickham et al. which, combined with the ingenious <code>%&gt;%</code> from magrittr, provides a uniform philosophy for handling data.</p>
 <p>The genomics community has an alternative set of approaches, for which <a href="http://bioconductor.org/">bioconductor</a> and the <a href="http://bioconductor.org/packages/release/bioc/html/GenomicRanges.html">GenomicRanges</a> package provide the basis. The <code>GenomicRanges</code> and the underlying <code>IRanges</code> package provide a great set of methods for dealing with intervals as they typically encountered in genomics.</p>
 <p>Unfortunately it is not always easy to combine those two worlds, many common operations in <code>GenomicRanges</code> focus solely on the ranges and loose the additional metadata columns. On the other hand the <code>tidyverse</code> does not provide a unified set of methods to do common set operations with intervals.</p>
-<p>At least until recently, when the <a href="https://github.com/dgrtwo/fuzzyjoin">fuzzyjoin</a> package was extented with the <code>genome_join</code> method for combining genomic data stored in a <code>data.frame</code>. It demonstrated that genomic data could appropriately be handled with the <em>tidy</em>-philosophy.</p>
+<p>At least until recently, when the <a href="https://github.com/dgrtwo/fuzzyjoin">fuzzyjoin</a> package was extended with the <code>genome_join</code> method for combining genomic data stored in a <code>data.frame</code>. It demonstrated that genomic data could appropriately be handled with the <em>tidy</em>-philosophy.</p>
 <p>The <code>tidygenomics</code> package extends the limited set of methods provided by the <code>fuzzyjoin</code> package for dealing with genomic data. Its API is inspired by the very popular <a href="http://bedtools.readthedocs.io/en/latest/index.html">bedtools</a>:</p>
 <ul>
 <li><code>genome_intersect</code></li>

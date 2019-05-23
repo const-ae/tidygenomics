@@ -11,8 +11,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The most dramatic impact on programming in R the last years was the developement of the [tidyverse](http://tidyverse.org/) by Hadley Wickham et al.
-which, combined with the ingenious `%>%` from magrittr, provides a uniform philsophy for handling data.
+The most dramatic impact on programming in R the last years was the development of the [tidyverse](http://tidyverse.org/) by Hadley Wickham et al.
+which, combined with the ingenious `%>%` from magrittr, provides a uniform philosophy for handling data.
 
 The genomics community has an alternative set of approaches, for which [bioconductor](http://bioconductor.org/) and the 
 [GenomicRanges](http://bioconductor.org/packages/release/bioc/html/GenomicRanges.html) package provide the basis. The `GenomicRanges` and
@@ -22,7 +22,7 @@ Unfortunately it is not always easy to combine those two worlds, many common ope
 ranges and loose the additional metadata columns. On the other hand the `tidyverse` does not provide a unified set of methods
 to do common set operations with intervals.
 
-At least until recently, when the [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) package was extented with the `genome_join`
+At least until recently, when the [fuzzyjoin](https://github.com/dgrtwo/fuzzyjoin) package was extended with the `genome_join`
 method for combining genomic data stored in a `data.frame`. It demonstrated that genomic data could appropriately be handled
 with the _tidy_-philosophy.
 
