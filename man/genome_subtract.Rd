@@ -37,4 +37,5 @@ x2 <- data.frame(id = 1:4, BLA=LETTERS[1:4],
 j <- genome_subtract(x1, x2, by=c("chromosome", "start", "end"))
 print(j)
 
+
 }

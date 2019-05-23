@@ -25,7 +25,6 @@
 #' j <- genome_subtract(x1, x2, by=c("chromosome", "start", "end"))
 #' print(j)
 #'
-#' @importFrom dplyr n
 #'
 #' @export
 genome_subtract <- function(x, y, by=NULL){

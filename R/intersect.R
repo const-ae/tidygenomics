@@ -1,4 +1,14 @@
 
+#' @importFrom dplyr "%>%" "n"
+#' @importFrom rlang "sym" ":="
+NULL
+
+
+## quiets concerns of R CMD check re: the .'s that appear in pipelines
+if(getRversion() >= "2.15.1")  utils::globalVariables(c("..start", "..end", "..id", "..distance"))
+
+
+
 #' Intersect data frames based on chromosome, start and end.
 #'
 #' @param x A dataframe.
@@ -24,7 +34,6 @@
 #' print(j)
 #'
 #'
-#' @importFrom dplyr "%>%"
 #'
 #' @export
 genome_intersect <- function(x, y, by=NULL, mode= "both"){

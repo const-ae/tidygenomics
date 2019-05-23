@@ -2,7 +2,7 @@ Package: tidygenomics
 Type: Package
 Title: Tidy Verbs for Dealing with Genomic Data Frames
 Version: 0.1.0.9000
-Authors@R:c(person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", role = c("aut", "cre")),
+Authors@R: c(person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", role = c("aut", "cre")),
     person("Stan Developers", role="cph", 
            comment="Code from the Stan Math library is reused in 'cluster_interval.cpp'"),
     person("David", "Robinson", role="cph", 
@@ -17,6 +17,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
+    rlang,
     purrr,
     tidyr,
     fuzzyjoin (>= 0.1.3),
@@ -25,7 +26,7 @@ Imports:
 Suggests: testthat,
     knitr,
     rmarkdown
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 LinkingTo:
     Rcpp
 VignetteBuilder: knitr
