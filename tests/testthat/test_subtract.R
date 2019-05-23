@@ -4,12 +4,12 @@ context("genome_subtract")
 
 suppressPackageStartupMessages(library(dplyr))
 
-x1 <- data_frame(id = 1:4, bla=letters[1:4],
+x1 <- tibble(id = 1:4, bla=letters[1:4],
                  chromosome = c("chr1", "chr1", "chr2", "chr1"),
                  start = c(100, 200, 300, 400),
                  end = c(150, 250, 350, 450))
 
-x2 <- data_frame(id = 1:4, BLA=LETTERS[1:4],
+x2 <- tibble(id = 1:4, BLA=LETTERS[1:4],
                  chromosome = c("chr1", "chr2", "chr1", "chr1"),
                  start = c(120, 210, 300, 400),
                  end = c(125, 240, 320, 415))
@@ -25,12 +25,12 @@ test_that("Subtraction of 2 data frames works as expected", {
 
 
 test_that("Edge cases of subtraction of 2 data frames works as expected", {
-  x1 <- data_frame(id = 1:2, bla=letters[1:2],
+  x1 <- tibble(id = 1:2, bla=letters[1:2],
                    chromosome = c("chr1", "chr1"),
                    start = c(100, 200),
                    end = c(150, 250))
 
-  x2 <- data_frame(id = 1:4, BLA=LETTERS[1:4],
+  x2 <- tibble(id = 1:4, BLA=LETTERS[1:4],
                    chromosome = c("chr1", "chr1", "chr1", "chr1"),
                    start = c(120, 110, 190, 400),
                    end = c(125, 122, 320, 415))
@@ -44,12 +44,12 @@ test_that("Edge cases of subtraction of 2 data frames works as expected", {
 
 
 test_that("during subtraction the intervals are not unified", {
-  x1 <- data_frame(id = 1:3, bla=letters[1:3],
+  x1 <- tibble(id = 1:3, bla=letters[1:3],
                    chromosome = c("chr1", "chr1", "chr1"),
                    start = c(100, 115, 200),
                    end = c(150, 160, 250))
 
-  x2 <- data_frame(id = 1, BLA=LETTERS[1],
+  x2 <- tibble(id = 1, BLA=LETTERS[1],
                    chromosome = c("chr1"),
                    start = c(110),
                    end = c(130))

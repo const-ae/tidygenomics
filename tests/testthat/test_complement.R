@@ -3,7 +3,7 @@ context("genome_complement")
 
 library(dplyr)
 
-x1 <- data_frame(id = 1:4, bla=letters[1:4],
+x1 <- tibble(id = 1:4, bla=letters[1:4],
                  chromosome = c("chr1", "chr1", "chr2", "chr1"),
                  start = c(100, 200, 300, 400),
                  end = c(150, 250, 350, 450))

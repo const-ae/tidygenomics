@@ -96,15 +96,15 @@ Joins 2 data frames based on their genomic location. If no exact overlap is foun
 <img src="resources/genome_join_closest_docu.png" alt="genome_join_closest" style="width: 100%;"/>
 
 ```{r}
-x1 <- data_frame(id = 1:4, 
-                 chr = c("chr1", "chr1", "chr2", "chr3"),
-                 start = c(100, 200, 300, 400),
-                 end = c(150, 250, 350, 450))
+x1 <- tibble(id = 1:4, 
+             chr = c("chr1", "chr1", "chr2", "chr3"),
+             start = c(100, 200, 300, 400),
+             end = c(150, 250, 350, 450))
 
-x2 <- data_frame(id = 1:4,
-                 chr = c("chr1", "chr1", "chr1", "chr2"),
-                 start = c(220, 210, 300, 400),
-                 end = c(225, 240, 320, 415))
+x2 <- tibble(id = 1:4,
+             chr = c("chr1", "chr1", "chr1", "chr2"),
+             start = c(220, 210, 300, 400),
+             end = c(225, 240, 320, 415))
 genome_join_closest(x1, x2, by=c("chr", "start", "end"), distance_column_name="distance", mode="left")
 ```
 
@@ -149,15 +149,15 @@ Classical join function based on the overlap of the interval. Implemented and ma
 <img src="resources/genome_join_docu.png" alt="genome_join" style="width: 100%;"/>
 
 ```{r}
-x1 <- data_frame(id = 1:4, 
-                 chr = c("chr1", "chr1", "chr2", "chr3"),
-                 start = c(100, 200, 300, 400),
-                 end = c(150, 250, 350, 450))
+x1 <- tibble(id = 1:4, 
+             chr = c("chr1", "chr1", "chr2", "chr3"),
+             start = c(100, 200, 300, 400),
+             end = c(150, 250, 350, 450))
 
-x2 <- data_frame(id = 1:4,
-                 chr = c("chr1", "chr1", "chr1", "chr2"),
-                 start = c(220, 210, 300, 400),
-                 end = c(225, 240, 320, 415))
+x2 <- tibble(id = 1:4,
+             chr = c("chr1", "chr1", "chr1", "chr2"),
+             start = c(220, 210, 300, 400),
+             end = c(225, 240, 320, 415))
 fuzzyjoin::genome_join(x1, x2, by=c("chr", "start", "end"), mode="inner")
 
 fuzzyjoin::genome_join(x1, x2, by=c("chr", "start", "end"), mode="left")
