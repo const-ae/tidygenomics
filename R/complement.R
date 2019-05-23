@@ -33,11 +33,9 @@ genome_complement <- function(x, chromosome_size=NULL, by=NULL){
 
   if(is.null(chromosome_size)){
     chromosome_size <- x %>%
-      dplyr::group_by_(by[1]) %>%
-      dplyr::summarize_(.dots=list(
-        start=1,
-        end=paste0("max(", by[3], ")")
-      ))
+      dplyr::group_by(!! sym(by[1])) %>%
+      dplyr::summarize(start = 1,
+                       end = max(!! sym(by[3])))
   }else if(ncol(chromosome_size) == 2){
     chromosome_size <- cbind(chromosome_size[, 1, drop=FALSE], data.frame(start=1), chromosome_size[, -1, drop=FALSE])
   }

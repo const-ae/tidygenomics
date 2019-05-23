@@ -66,7 +66,7 @@ genome_join_closest <- function(x, y, by=NULL,  mode = "inner",
       o <- as.data.frame(IRanges::distanceToNearest(r1, r2, select=select))
 
       data.frame(x = xd$..index[o$queryHits], y = yd$..index[o$subjectHits], ..distance=o$distance) %>%
-        dplyr::filter_(paste0("..distance < ", max_distance))
+        dplyr::filter(`..distance` < max_distance)
     }
 
     ret <- purrr::map2_df(joined$x_data, joined$y_data, find_closest)

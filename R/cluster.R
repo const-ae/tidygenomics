@@ -45,17 +45,11 @@ genome_cluster <- function(x, by=NULL, max_distance=0, cluster_column_name="clus
     stop("genome_cluster must join on exactly three columns")
   }
 
-
   ret <- x %>%
-    dplyr::group_by_(by[1]) %>%
-    # mutate(cluster_column_name=cluster_interval(start, end, max_distance))
-    dplyr::mutate_(.dots=stats::setNames(list(paste0("tidygenomics::cluster_interval(", by[2], ",", by[3], ", ", max_distance, ")")),
-                                         cluster_column_name)) %>%
+    dplyr::group_by(!!sym(by[1])) %>%
+    dplyr::mutate(!! cluster_column_name := cluster_interval(!!sym(by[2]), !!sym(by[3]), max_distance = max_distance)) %>%
     dplyr::ungroup() %>%
-    # dplyr::mutate(cluster=(paste0(chromosome,"-", cluster) %>% as.factor %>% as.numeric())-1)
-    dplyr::mutate_(.dots=stats::setNames(list(paste0("as.numeric(as.factor(paste0(", by[1],",\"-\",", cluster_column_name, ")))-1")),
-                                  cluster_column_name))
-
+    dplyr::mutate(!! cluster_column_name := as.numeric(as.factor(paste0(!!sym(by[1]), "-", !!sym(cluster_column_name))))-1)
 
   ret <- regroup(ret)
   return(ret)

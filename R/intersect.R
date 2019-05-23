@@ -93,8 +93,8 @@ genome_intersect <- function(x, y, by=NULL, mode= "both"){
       dplyr::select(- dplyr::one_of(by$x[-1])) %>%
       dplyr::mutate(..id=seq_len(n())) %>%
       dplyr::inner_join(matches[, c("x", "..start", "..end")], by=c("..id"="x")) %>%
-      dplyr::rename_(.dots=stats::setNames(c("..start", "..end"), by$x[-1])) %>%
-      dplyr::select_(quote(- `..id`)) %>%
+      dplyr::rename(!! by$x[2] := `..start`, !! by$x[3] := `..end`) %>%
+      dplyr::select(- `..id`) %>%
       regroup()
     return(ret)
   }
@@ -103,8 +103,8 @@ genome_intersect <- function(x, y, by=NULL, mode= "both"){
       dplyr::select(- dplyr::one_of(by$y[-1])) %>%
       dplyr::mutate(..id=seq_len(n())) %>%
       dplyr::inner_join(matches[,c("y", "..start", "..end")], by=c("..id"="y")) %>%
-      dplyr::rename_(.dots=stats::setNames(c("..start", "..end"), by$y[-1])) %>%
-      dplyr::select_(quote(- `..id`)) %>%
+      dplyr::rename(!! by$y[2] := `..start`, !! by$y[3] := `..end`) %>%
+      dplyr::select(- `..id`) %>%
       regroup()
     return(ret)
   }
@@ -112,10 +112,10 @@ genome_intersect <- function(x, y, by=NULL, mode= "both"){
   matches <- dplyr::arrange(matches, x, y)
   for (n in intersect(colnames(x), colnames(y))) {
     if(! n %in% by$x){
-      x <- dplyr::rename_(x, .dots = structure(n, .Names = paste0(n,".x")))
+      x <- dplyr::rename(x, !! paste0(n, ".x") := !! sym(n))
     }
     if(! n %in% by$y){
-      y <- dplyr::rename_(y, .dots = structure(n, .Names = paste0(n,".y")))
+      y <- dplyr::rename(y, !! paste0(n, ".y") := !! sym(n))
     }
   }
 
@@ -124,7 +124,7 @@ genome_intersect <- function(x, y, by=NULL, mode= "both"){
   if (ncol(matches) > 2) {
     extra_cols <- matches[, -(1:2), drop = FALSE]
     ret <- dplyr::bind_cols(ret, extra_cols) %>%
-      dplyr::rename_(.dots=stats::setNames(c("..start", "..end"), by$x[-1]))
+      dplyr::rename(!! by$x[2] := `..start`, !! by$x[3] := `..end`)
   }
   regroup(ret)
 

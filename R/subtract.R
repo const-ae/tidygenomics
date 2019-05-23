@@ -83,13 +83,12 @@ genome_subtract <- function(x, y, by=NULL){
   d2 <- y[, by$y, drop = FALSE]
 
   matches <- f(d1, d2)
-
   ret <- x %>%
     dplyr::select(- dplyr::one_of(by$x[-1])) %>%
     dplyr::mutate(..id=seq_len(n())) %>%
     dplyr::inner_join(matches[, c("x", "..start", "..end")], by=c("..id"="x")) %>%
-    dplyr::rename_(.dots=stats::setNames(c("..start", "..end"), by$x[-1])) %>%
-    dplyr::select_(quote(- `..id`)) %>%
+    dplyr::rename(!! by$x[2] := `..start`, !! by$x[3] := `..end`) %>%
+    dplyr::select(- `..id`) %>%
     regroup()
   return(ret)
 
