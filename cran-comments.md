@@ -1,11 +1,11 @@
-## Resubmission
-This is a resubmission. In this version I have:
+# Bug fix
 
-* Added the Stan developers and David Robinson to the author list as copyright holders in the Description file
+In this release I have fixed a bug and ported code to new dplyr API
 
 ## Test environments
-* linux ubuntu: r 3.4.0
-* win-builder (devel and release)
+* linux ubuntu: r 3.6.0
+* R-Hub (Fedora R-devel, Ubuntu R-release)
+* winbuilder (R-devel, R-release)
 
 ## R CMD check results
 There were no ERRORs, WARNINGs
@@ -13,3 +13,4 @@ There were no ERRORs, WARNINGs
 ## Downstream dependencies
 
 There is no downstream dependency yet
+  
