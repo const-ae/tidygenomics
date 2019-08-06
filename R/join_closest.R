@@ -52,8 +52,9 @@ genome_join_closest <- function(x, y, by=NULL,  mode = "inner",
     # nest around the chromosome column
     x$..index <- seq_len(nrow(x))
     y$..index <- seq_len(nrow(y))
-    nested_x <- tidyr::nest_(x, "x_data", colnames(x)[-1])
-    nested_y <- tidyr::nest_(y, "y_data", colnames(y)[-1])
+
+    nested_x <- dplyr::group_by_at(x, 1) %>% tidyr::nest()
+    nested_y <- dplyr::group_by_at(y, 1) %>% tidyr::nest()
     by <- c(colnames(nested_y)[1])
     names(by) <- colnames(nested_x)[1]
 
@@ -69,7 +70,7 @@ genome_join_closest <- function(x, y, by=NULL,  mode = "inner",
         dplyr::filter(`..distance` < max_distance)
     }
 
-    ret <- purrr::map2_df(joined$x_data, joined$y_data, find_closest)
+    ret <- purrr::map2_df(joined$data.x, joined$data.y, find_closest)
 
     if(! is.null(distance_column_name)){
       ret[[distance_column_name]] <- ret$..distance
