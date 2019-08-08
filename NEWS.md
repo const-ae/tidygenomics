@@ -1,4 +1,9 @@
 
+# v0.1.2
+
+* Remove remaining calls to deprecated tidyr functions to become compatible with tidyr v1.0.0.
+  Thanks to @jennybc for the pull request (#6)
+
 # v0.1.1
 
 * Fix issue #5

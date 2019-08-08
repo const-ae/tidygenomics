@@ -3,7 +3,7 @@
 In this release I have fixed a bug and ported code to new dplyr API
 
 ## Test environments
-* linux ubuntu: r 3.6.0
+* macOS Mojave: R 3.6.1
 * R-Hub (Fedora R-devel, Ubuntu R-release)
 * winbuilder (R-devel, R-release)
 
