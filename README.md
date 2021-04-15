@@ -15,8 +15,10 @@ popular bedtools and the genome_join() method from the fuzzyjoin package.
 
 ```
 install.packages("tidygenomics")
+```
 
-# Or to get the latest development version
+Or to get the latest development version
+```
 devtools::install_github("const-ae/tidygenomics")
 ```
 
