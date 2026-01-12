@@ -40,7 +40,7 @@ genome_subtract <- function(x, y, by=NULL){
     g <- purrr::map_chr(x_groups, as.character)
     missing <- !(g %in% colnames(d))
     g[missing] <- paste0(g[missing], ".x")
-    dplyr::group_by_(d, .dots = g)
+    dplyr::group_by_at(d, g)
   }
 
   by <- dplyr::common_by(by, x, y)
