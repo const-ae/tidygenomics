@@ -15,6 +15,6 @@
 
 * Add pkgdown webpage: https://const-ae.github.io/tidygenomics/
 
-# Initial Release (v0.1.0)
+# v0.1.0
 
 First acceptance on CRAN
