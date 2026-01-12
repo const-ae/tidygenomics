@@ -38,7 +38,7 @@ genome_cluster <- function(x, by=NULL, max_distance=0, cluster_column_name="clus
     g <- purrr::map_chr(x_groups, as.character)
     missing <- !(g %in% colnames(d))
     g[missing] <- paste0(g[missing], ".x")
-    dplyr::group_by_(d, .dots = g)
+    dplyr::group_by(d, dplyr::pick(dplyr::all_of(g)))
   }
 
   if (is.null(by) | length(by) != 3) {

@@ -49,7 +49,7 @@ genome_intersect <- function(x, y, by=NULL, mode= "both"){
     g <- purrr::map_chr(x_groups, as.character)
     missing <- !(g %in% colnames(d))
     g[missing] <- paste0(g[missing], ".x")
-    dplyr::group_by_(d, .dots = g)
+    dplyr::group_by(d, dplyr::pick(dplyr::all_of(g)))
   }
 
   mode <- match.arg(mode, c("both", "left", "right", "anti"))
