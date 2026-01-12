@@ -1,4 +1,9 @@
 
+# v0.1.3
+
+* Fix deprecated use of `dplyr::group_by_`.
+* Fix NEWS file to satisfy CRAN checks
+
 # v0.1.2
 
 * Remove remaining calls to deprecated tidyr functions to become compatible with tidyr v1.0.0.
